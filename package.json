@@ -1,0 +1,26 @@
+{
+  "name": "cse356",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon --exec babel-node ./src/index.js",
+    "clean": "rm -rf dist",
+    "build": "npm run clean && babel ./src --out-dir dist --copy-files",
+    "prod": "node ./dist/index.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.0",
+    "express": "~4.16.1",
+    "mongoose": "^6.2.10",
+    "node-fetch": "^3.2.3",
+    "nodemailer": "^6.7.3"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.17.6",
+    "@babel/core": "^7.17.9",
+    "@babel/node": "^7.16.8",
+    "@babel/preset-env": "^7.16.11",
+    "nodemon": "^2.0.15"
+  }
+}
