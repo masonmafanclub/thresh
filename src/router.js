@@ -3,7 +3,7 @@ import fetch from "node-fetch";
 import crypto from "crypto";
 import "dotenv/config";
 
-import { User, Session } from "./model.js";
+import { User, Session } from "./model";
 
 const router = express.Router();
 

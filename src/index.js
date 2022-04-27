@@ -1,6 +1,6 @@
 import http from "http";
 
-import app from "./app.js";
+import app from "./app";
 
 var server = http.createServer(app);
 server.listen(3000);
