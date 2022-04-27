@@ -1,6 +1,7 @@
 import express from "express";
 import fetch from "node-fetch";
 import crypto from "crypto";
+import mongoose from "mongoose";
 import "dotenv/config";
 
 import { User, Session } from "./model";
@@ -21,7 +22,7 @@ router.post("/signup", async (req, res) => {
     name: req.body.name,
     password: req.body.password,
     email: req.body.email,
-    verified: false,
+    verified: req.body.verified ? true : false,
     key,
   });
   await user.save();
@@ -88,13 +89,15 @@ router.post("/logout", async (req, res) => {
 });
 
 // verify
-router.get("/verify", async (req, res) => {
-  if (!req.query.id || !req.query.key)
+router.post("/verify", async (req, res) => {
+  if (!req.body.id || !req.body.key)
     return res.json({ error: true, msg: "missing info" });
 
-  // find and update user
+  if (!mongoose.isValidObjectId(req.body.id))
+    return res.json({ error: true, msg: "invalid key/id" });
+
   let userres = await User.updateOne(
-    { _id: req.query.id, key: req.query.key, verified: false },
+    { _id: req.body.id, key: req.body.key, verified: false },
     { verified: true }
   ).exec();
 
