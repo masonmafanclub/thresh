@@ -45,8 +45,8 @@ router.post("/signup", async (req, res) => {
 
 // login
 router.post("/login", async (req, res, next) => {
-  if (!req.body.name || !req.body.password || !req.body.cookie)
-    return res.json({ status: "ERROR", msg: "missing info" });
+  if (!req.body.email || !req.body.password || !req.body.cookie)
+    return res.json({ error: true, msg: "missing info" });
 
   const user = await User.findOne({
     email: req.body.email,
